@@ -16,9 +16,7 @@ The returning of books will be done physically.
 
 Optional additions
 ----------
-   1 - username + password 
    2 - reseration extention. 
-
 
 
 DESIGN
@@ -29,9 +27,35 @@ Main Options
   1 - Search for Book
   2 - Reserve book
   3 - Request book added to library
+  4 - User Login / Sign up
   
-
 Refinements
 --------------
   1 -  Search for book
-    1.1 - 
+    1.1 - Ask user for search details
+      1.1.1 - Field : Search for book by name
+      1.1.2 - Field : Search for book by Unique ID (UID*)
+        1.1.2.1 - UID may be determined by ISDN number or by Library specific barcoding system. Parameter : book_UID
+      1.1.3 - Field : Search for book by Author 
+      1.1.4 - Field (Radial selection): Search for book by Status**
+        1.1.4.1 - Status Parameters may include: instock, lent, and conditions like good, average, in need of repair.
+    1.2 - Button: send parameters to step 1.3: book_Name, book_UID, book_Author, book_status, book_condition
+    1.3 - Perform Search with  parameters: book_Name, book_UID, book_Author, book_status, book_condition
+      1.3.1 - Condition: book_Name == null
+        1.3.1.1 - Action: set this.book_Name = '*' 
+        1.3.1.2 - otherwise: set this.book_Name = book_Name
+      1.3.2 - Condition: book_UID == null
+        1.3.2.1 - Action: set this.book_UID = '*'
+        1.3.2.2 - otherwise = set this
+  
+  2 - Reserve book  - (book_UID)
+    2.1 - Run step 1.3 with book_UID as parameter
+    2.2 - Condition : End user is not signed in
+      2.2.1 - run step 4.0
+    2.3 - Button : Reserve book
+
+
+
+
+
+
