@@ -1,0 +1,37 @@
+BRIEF
+====
+Make a website for an online repository for reserving and requesting books from a physical library
+
+
+SPECIFICATION
+=============
+A website (developed using HTML, CSS and Javascript) to facilitate the following
+  1 - Allow end user to find a book from a list of available books (Search engine)
+  2 - Allow end user to reserve a book once found (resource allocator)
+  3 - If requested book cannot be found, a system to inform the library of a book they wish to to see included in the library (Request form).
+  
+Assumptions
+-----------
+The returning of books will be done physically. 
+
+Optional additions
+----------
+   1 - username + password 
+   2 - reseration extention. 
+
+
+
+DESIGN
+======
+
+Main Options
+-----------------
+  1 - Search for Book
+  2 - Reserve book
+  3 - Request book added to library
+  
+
+Refinements
+--------------
+  1 -  Search for book
+    1.1 - 
