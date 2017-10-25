@@ -13,11 +13,33 @@ A website (developed using HTML, CSS and Javascript) to facilitate the following
 Assumptions
 -----------
 The returning of books will be done physically. 
+This specification is for the search engine display.
+The database creation and population will be handled in another design doc.
+Display will be handled in another design doc.
 
 Optional additions
 ----------
-   2 - reseration extention. 
+   1 - reservation extention. 
+   2 - Book rank based search (see information on Google page rank)
+   
+Objects
+-------
+Book Object
+	parameters
+	- Array book_List: [book_Name, book_UID, book_Author, book_Status, book_Condition]* : string
+	- quantity : int
+	- quantity_Lent: int 
 
+	
+	
+
+* The variables listed are parameters for the constructor.	
+
+User Object 
+	parameters
+	- email : string 
+	- password : string 
+	- logged_in : boolean
 
 DESIGN
 ======
@@ -37,37 +59,45 @@ Refinements
       1.1.1 - Field : Search for book by name
       1.1.2 - Field : Search for book by Unique ID (UID*)
         1.1.2.1 - UID may be determined by ISDN number or by Library specific barcoding system. Parameter : book_UID
-      1.1.3 - Field : Search for book by Author 
-      1.1.4 - Field (Radial selection): Search for book by Status**
+      1.1.2 - Field : Search for book by Author 
+      1.1.4 - Field (Radial selection): Search for book by Status
         1.1.4.1 - Status Parameters may include: default =instock, lent, and conditions like default = good, average, in need of repair.
-    1.2 - Button: send parameters to step 1.3: book_Name, book_UID, book_Author, book_status, book_condition¹
-    1.3 - Perform Search with  parameters: book_Name, book_UID, book_Author, book_Status, book_Condition
-      1.3.1 - Condition: book_Name == null
-        1.3.1.1 - Action: set this.book_Name = '*' 
-        1.3.1.2 - otherwise: set this.book_Name = book_Name
-      1.3.2 - Condition: book_UID == null
-        1.3.2.1 - Action: set this.book_UID = '*'
-        1.3.2.2 - otherwise = set this.book_UID = book_UID
-      1.3.3 - Condition: book_Author == null
-        1.3.3.1 - Action: set this.book_Author = '*'
-        1.3.3.2 - Otherwise = Set this.book_Author
-      1.3.4
-      1.3.5
-      1.3.6 - Condition : all variables == '*'
-        1.3.6.1 - Action: create new display( no parameters) - display complete list. [5.0]
-        1.3.6.2 - otherwise Condition: 
-  
+ 
+    1.2 - Perform Search with  parameters: set book_Details = [book_Name, book_UID, book_Author, book_Status, book_Condition]
+      1.2.1 - Start loop; set counter to 0; condition: counter < book_Details.length
+	    1.2.1.2 - Condition: book_Details[counter] == null; Action: book_Details = '*'
+	  1.2.2 - End loop.
+		
+      1.2.3 - Test search condition parameters against book_List²
+		1.2.3.1 - initialise query_List as a list of books
+		  1.2.3.1.1 - Start Loop: set counter1 to 0; condition: counter1 < book_List.length
+			1.2.3.1.1.1 - Start Loop: set counter2 to 0 condition: counter2 < book_Details.length
+			  1.2.3.1.1.1.1 - condition: book_Details[counter2] == book_List[counter1].book_Details[counter2] or book_Details[counter2] == '*'
+			    1.2.3.1.1.1.1.1 - Action: condition: query_List is not empty and book_list[counter1] != query_List.last
+			      1.2.3.1.1.1.1.1.1 - Action: add book_List[counter1] to query_List
+			1.2.3.1.1.2 - End Loop
+		  1.2.3.1.1 - End Loop
+	
+	1.3 - return book_List to display.
   
   2 - Reserve book  - (book_UID)
-    2.1 - Run search with book_UID as parameter [1.3]
+    2.1 - Run search with book_UID as parameter [1.2]
     2.2 - Condition : End user is not signed in
       2.2.1 - Ask user to sign in [4.0]
     2.3 - Button : Reserve book
+	
+  3 - Request A Book added to the Library
 
 
+  4 - User Login / Sign Up 
+	4.1 - Textbox: Email entered here
+	4.2 - protected Textbox: password entered here
+	4.3 - button: Sign in
+	4.5 - button: Sign up/Register
 
 ¹May need to place them in array to improve coding efficiency ( might keep it to improve workflow efficiency
-
+² book_List derived from designing the "Database" 
+³ variable name = book_Details
 
 
 
