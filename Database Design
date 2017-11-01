@@ -79,13 +79,13 @@ Refinements
       1.1.2 - Field : Search for book by Unique ID (UID*)
         1.1.2.1 - UID may be determined by ISDN number or by Library specific barcoding system. Parameter : book_UID
       1.1.2 - Field : Search for book by Author 
-      1.1.4 - Field (Radial selection): Search for book by Status
-        1.1.4.1 - Status Parameters may include: default =instock, lent, and conditions like default = good, average, in need of repair.
+      1.1.3 - Field (Radial selection): Search for book by Status
+        1.1.3.1 - Status Parameters may include: default =instock, lent, and conditions like default = good, average, in need of repair.
  
-    1.2 - Perform Search with  parameters: set book_Details = [book_Name, book_UID, book_Author, book_Status, book_Condition]
+    1.2 - Perform Search with  parameters: set book_Details = [book_Name, book_UID, book_Author, book_Status, book_Condition] // searches for blanks, replaces with '*'
       1.2.1 - Start loop; set counter to 0; condition: counter < book_Details.length
 	    1.2.1.2 - Condition: book_Details[counter] == null; Action: book_Details = '*'
-	  1.2.2 - End loop.
+      1.2.2 - End loop.
 		
       1.2.3 - Test search condition parameters against Book_List²
 		1.2.3.1 - initialise query_List as a list of books
